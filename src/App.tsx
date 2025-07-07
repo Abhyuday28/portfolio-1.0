@@ -13,7 +13,7 @@ import {
   Star,
   Linkedin,
 } from 'lucide-react';
-import { useHapticFeedback } from './hooks/useHapticFeedback';
+
 
 interface TimelineItem {
   id: string;
@@ -145,7 +145,7 @@ function App() {
   const [screenSize, setScreenSize] = useState('desktop');
 
   const timelineRef = useRef<HTMLDivElement>(null);
-  const haptic = useHapticFeedback();
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -207,9 +207,9 @@ function App() {
           }
 
           // Haptic feedback for timeline progression
-          if (clampedItemIndex !== currentVisibleItem) {
-            haptic.timeline();
-          }
+          // if (clampedItemIndex !== currentVisibleItem) {
+          //   haptic.timeline();
+          // }
         }
       }
     };
@@ -217,7 +217,7 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentVisibleItem, haptic]);
+  }, [currentVisibleItem]);
 
   // Calculate responsive card width and transform values
   const getCardWidth = () => {
@@ -388,9 +388,9 @@ function App() {
                             setActiveItem(
                               activeItem === item.id ? null : item.id
                             );
-                            haptic.medium();
+                            // haptic.medium();
                           }}
-                          onMouseEnter={() => haptic.light()}
+                          // onMouseEnter={() => haptic.light()}
                           className={`w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-gradient-to-r ${
                             typeColors[item.type]
                           } 
@@ -421,9 +421,9 @@ function App() {
                             setActiveItem(
                               activeItem === item.id ? null : item.id
                             );
-                            haptic.medium();
+                            // haptic.medium();
                           }}
-                          onMouseEnter={() => haptic.light()}
+                          // onMouseEnter={() => haptic.light()}
                         >
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-lg sm:text-xl font-bold text-blue-400">
@@ -513,7 +513,7 @@ function App() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs sm:text-sm"
-                                    onClick={() => haptic.success()}
+                                    // onClick={() => haptic.success()}
                                   >
                                     <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
                                     View Project
@@ -582,8 +582,8 @@ function App() {
                     <div key={skill} className="w-full">
                       <div
                         className="text-center text-gray-300 py-2 px-4 rounded-lg transition-all duration-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transform hover:scale-105 cursor-pointer "
-                        onMouseEnter={() => haptic.light()}
-                        onClick={() => haptic.medium()}
+                        // onMouseEnter={() => haptic.light()}
+                        // onClick={() => haptic.medium()}
                       >
                         {skill}
                       </div>
@@ -617,8 +617,8 @@ function App() {
                 <a
                   href="mailto:abhyuday@example.com"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  onMouseEnter={() => haptic.light()}
-                  onClick={() => haptic.medium()}
+                  // onMouseEnter={() => haptic.light()}
+                  // onClick={() => haptic.medium()}
                 >
                   <Mail className="w-5 h-5 mr-3" />
                   rajabhyuday01@gmail.com
@@ -626,8 +626,8 @@ function App() {
                 <a
                   href="tel:+919876543210"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  onMouseEnter={() => haptic.light()}
-                  onClick={() => haptic.medium()}
+                  // onMouseEnter={() => haptic.light()}
+                  // onClick={() => haptic.medium()}
                 >
                   <Phone className="w-5 h-5 mr-3" />
                   +91 6360058498
@@ -635,8 +635,8 @@ function App() {
                 <a
                   href="https://github.com/abhyuday"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  onMouseEnter={() => haptic.light()}
-                  onClick={() => haptic.medium()}
+                  // onMouseEnter={() => haptic.light()}
+                  // onClick={() => haptic.medium()}
                 >
                   <Github className="w-5 h-5 mr-3" />
                   https://github.com/Abhyuday28
@@ -644,8 +644,8 @@ function App() {
                 <a
                   href="https://linkedin.com/in/abhyuday"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  onMouseEnter={() => haptic.light()}
-                  onClick={() => haptic.medium()}
+                  // onMouseEnter={() => haptic.light()}
+                  // onClick={() => haptic.medium()}
                 >
                   <Linkedin className="w-5 h-5 mr-3" />
                   https://www.linkedin.com/in/abhyuday-abd2807/
@@ -658,25 +658,25 @@ function App() {
                 type="text"
                 placeholder="Your Name"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                onFocus={() => haptic.light()}
+                // onFocus={() => haptic.light()}
               />
               <input
                 type="email"
                 placeholder="Your Email"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                onFocus={() => haptic.light()}
+                // onFocus={() => haptic.light()}
               />
               <textarea
                 rows={4}
                 placeholder="Your Message"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
-                onFocus={() => haptic.light()}
+                // onFocus={() => haptic.light()}
               />
               <button
                 type="submit"
                 className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
-                onMouseEnter={() => haptic.light()}
-                onClick={() => haptic.success()}
+                // onMouseEnter={() => haptic.light()}
+                // onClick={() => haptic.success()}
               >
                 Send Message
               </button>
