@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
   MapPin,
@@ -12,15 +13,44 @@ import {
   Award,
   Star,
   Linkedin,
+  Globe,
+  Database,
+  Palette,
+  Server,
+  Smartphone,
+  Monitor,
+  Layers,
+  FileCode,
+  Zap,
+  Package,
 } from 'lucide-react';
 
+// Technology Icons from react-icons
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiMongodb,
+  SiGithub,
+  SiExpress,
+  SiSocketdotio,
+  SiPython,
+  SiAmazon,
+  SiGit,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
+import { FaCode, FaServer, FaDatabase } from 'react-icons/fa';
 
 interface TimelineItem {
   id: string;
   year: string;
   title: string;
   organization: string;
-  type: 'intern' | 'education' | 'project' | 'achievement' ;
+  type: 'intern' | 'education' | 'project' | 'achievement';
   description: string;
   details: string[];
   technologies?: string[];
@@ -47,13 +77,13 @@ const timelineData: TimelineItem[] = [
   {
     id: '2',
     year: '2022',
-    title: 'Frontend Developer Trainee',
-    organization: 'Antrangini: Training Startup',
+    title: 'Antrangini: Front End Developer Trainee',
+    organization: 'Tech training Startup',
     type: 'intern',
     description:
-      'Developed proficiency in HTML, CSS, and JavaScript by building frontend projects.',
+      'Developed proficiency in HTML, CSS, and JavaScript by building multiple frontend projects.',
     details: [
-      'Get trained about frontend tech like HTML, CSS & JavaScript',
+      'Built responsive web applications using HTML,  CSS & JavaScript',
       'Learned to use Git and Github for version control during the deployment process',
       'Collaborated with cross-functional teams in agile environment',
       'Developed the Frontend of a Demo e-commerce website named Awesome.',
@@ -79,7 +109,7 @@ const timelineData: TimelineItem[] = [
       'Designed responsive UI with CSS, optimizing layout and styling for all devices',
       'Deployed on github.io',
     ],
-    technologies: ['HTML', 'CSS', 'JavaScript', 'Githum'],
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Github'],
     link: 'https://abhyuday28.github.io/',
   },
   {
@@ -137,6 +167,61 @@ const typeColors = {
   achievement: 'from-yellow-500 to-orange-500',
 };
 
+const techIcons: { [key: string]: any } = {
+  'HTML': SiHtml5,
+  'HTML5': SiHtml5,
+  'css': SiCss3,
+  'CSS': SiCss3,
+  'CSS3': SiCss3,
+  'javaScript': SiJavascript,
+  'JavaScript': SiJavascript,
+  'React.js': SiReact,
+  'Next.js': SiNextdotjs,
+  'Node.js': SiNodedotjs,
+  'MongoDB': SiMongodb,
+  'Shadcn/ui': SiReact,
+  'Github': SiGithub,
+  'Material-UI': FileCode,
+  'Express.js': SiExpress,
+  'Socket.io': SiSocketdotio,
+  'RESTful APIs': FaServer,
+  'Git': SiGit,
+  'AWS': SiAmazon,
+  'Python': SiPython,
+  'Machine Learning': FaCode,
+  'Agile': FaCode,
+  'Tailwind CSS': SiTailwindcss,
+  'TypeScript': SiTypescript,
+};
+
+const techColors: { [key: string]: string } = {
+  'HTML': '#E34F26',
+  'HTML5': '#E34F26',
+  'css': '#1572B6',
+  'CSS': '#1572B6',
+  'CSS3': '#1572B6',
+  'javaScript': '#F7DF1E',
+  'JavaScript': '#F7DF1E',
+  'React.js': '#61DAFB',
+  'Next.js': '#000000',
+  'Node.js': '#339933',
+  'MongoDB': '#47A248',
+  'Shadcn/ui': '#61DAFB',
+  'Github': '#181717',
+  'Githum': '#181717',
+  'Material-UI': '#007FFF',
+  'Express.js': '#000000',
+  'Socket.io': '#010101',
+  'RESTful APIs': '#FF6B6B',
+  'Git': '#F05032',
+  'AWS': '#FF9900',
+  'Python': '#3776AB',
+  'Machine Learning': '#FF6B6B',
+  'Agile': '#4CAF50',
+  'Tailwind CSS': '#06B6D4',
+  'TypeScript': '#3178C6',
+};
+
 function App() {
   const [activeItem, setActiveItem] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -145,7 +230,6 @@ function App() {
   const [screenSize, setScreenSize] = useState('desktop');
 
   const timelineRef = useRef<HTMLDivElement>(null);
-  
 
   useEffect(() => {
     const handleResize = () => {
@@ -205,11 +289,6 @@ function App() {
           if (timelineData[clampedItemIndex]) {
             setActiveItem(timelineData[clampedItemIndex].id);
           }
-
-          // Haptic feedback for timeline progression
-          // if (clampedItemIndex !== currentVisibleItem) {
-          //   haptic.timeline();
-          // }
         }
       }
     };
@@ -388,9 +467,7 @@ function App() {
                             setActiveItem(
                               activeItem === item.id ? null : item.id
                             );
-                            // haptic.medium();
                           }}
-                          // onMouseEnter={() => haptic.light()}
                           className={`w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-gradient-to-r ${
                             typeColors[item.type]
                           } 
@@ -421,9 +498,7 @@ function App() {
                             setActiveItem(
                               activeItem === item.id ? null : item.id
                             );
-                            // haptic.medium();
                           }}
-                          // onMouseEnter={() => haptic.light()}
                         >
                           <div className="flex items-center justify-between mb-3">
                             <span className="text-lg sm:text-xl font-bold text-blue-400">
@@ -449,29 +524,6 @@ function App() {
                             {item.description}
                           </p>
 
-                          {item.technologies && (
-                            <div className="flex flex-wrap gap-2 mt-4">
-                              {item.technologies
-                                .slice(0, screenSize === 'mobile' ? 2 : 3)
-                                .map((tech) => (
-                                  <span
-                                    key={tech}
-                                    className="px-2 sm:px-3 py-1 bg-slate-700/50 rounded-full text-xs sm:text-sm text-teal-300"
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              {item.technologies.length >
-                                (screenSize === 'mobile' ? 2 : 3) && (
-                                <span className="px-2 sm:px-3 py-1 bg-slate-700/50 rounded-full text-xs sm:text-sm text-gray-400">
-                                  +
-                                  {item.technologies.length -
-                                    (screenSize === 'mobile' ? 2 : 3)}
-                                </span>
-                              )}
-                            </div>
-                          )}
-
                           {/* Expanded Details */}
                           {(isActive || isCurrentItem) && (
                             <div className="mt-6 pt-4 border-t border-slate-600/50 animate-in slide-in-from-top duration-300">
@@ -489,23 +541,6 @@ function App() {
                                   ))}
                               </ul>
 
-                              {item.technologies &&
-                                item.technologies.length >
-                                  (screenSize === 'mobile' ? 2 : 3) && (
-                                  <div className="flex flex-wrap gap-2 mt-4">
-                                    {item.technologies
-                                      .slice(screenSize === 'mobile' ? 2 : 3)
-                                      .map((tech) => (
-                                        <span
-                                          key={tech}
-                                          className="px-2 sm:px-3 py-1 bg-slate-700/50 rounded-full text-xs sm:text-sm text-teal-300"
-                                        >
-                                          {tech}
-                                        </span>
-                                      ))}
-                                  </div>
-                                )}
-
                               {item.link && (
                                 <div className="mt-4">
                                   <a
@@ -513,13 +548,39 @@ function App() {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs sm:text-sm"
-                                    // onClick={() => haptic.success()}
                                   >
                                     <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
                                     View Project
                                   </a>
                                 </div>
                               )}
+                            </div>
+                          )}
+
+                          {/* Technologies Section - Always at Bottom */}
+                          {item.technologies && (
+                            <div className="mt-auto pt-4">
+                              <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">
+                                Technologies
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {item.technologies.map((tech) => {
+                                  const TechIcon = techIcons[tech] || FileCode;
+                                  const techColor = techColors[tech] || '#64FFDA';
+                                  return (
+                                    <div
+                                      key={tech}
+                                      className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 bg-slate-700/50 rounded-full text-xs sm:text-sm text-white hover:bg-slate-600/70 transition-all duration-300 cursor-pointer transform hover:scale-105 border border-slate-600/30 hover:border-slate-500/50"
+                                    >
+                                      <TechIcon 
+                                        className="w-3.5 h-3.5 sm:w-4 sm:h-4" 
+                                        style={{ color: techColor }}
+                                      />
+                                      <span>{tech}</span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             </div>
                           )}
                         </div>
@@ -543,55 +604,88 @@ function App() {
             </span>
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Random Technology Icons */}
+          <div className="relative min-h-[500px] w-full overflow-hidden">
             {[
-              {
-                category: 'Frontend',
-                skills: [
-                  'React.js',
-                  'JavaScript',
-                  'HTML5',
-                  'CSS3',
-                  'Material-UI',
-                ],
-              },
-              {
-                category: 'Backend',
-                skills: [
-                  'Node.js',
-                  'Express.js',
-                  'MongoDB',
-                  'RESTful APIs',
-                  'Socket.io',
-                ],
-              },
-              {
-                category: 'Tools & Others',
-                skills: ['Git', 'AWS', 'Python', 'Machine Learning', 'Agile'],
-              },
-            ].map((group) => (
-              <div
-                key={group.category}
-                className="bg-slate-800/50 rounded-xl p-8 border border-slate-700/50"
-              >
-                <h3 className="text-xl font-bold mb-6 text-blue-400">
-                  {group.category}
-                </h3>
-                <div className="space-y-4 flex flex-col items-center">
-                  {group.skills.map((skill) => (
-                    <div key={skill} className="w-full">
-                      <div
-                        className="text-center text-gray-300 py-2 px-4 rounded-lg transition-all duration-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transform hover:scale-105 cursor-pointer "
-                        // onMouseEnter={() => haptic.light()}
-                        // onClick={() => haptic.medium()}
-                      >
-                        {skill}
-                      </div>
+              { name: 'React.js', icon: SiReact, color: '#61DAFB', delay: '0s' },
+              { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E', delay: '0.2s' },
+              { name: 'HTML5', icon: SiHtml5, color: '#E34F26', delay: '0.4s' },
+              { name: 'CSS3', icon: SiCss3, color: '#1572B6', delay: '0.6s' },
+              { name: 'Node.js', icon: SiNodedotjs, color: '#339933', delay: '0.8s' },
+              { name: 'MongoDB', icon: SiMongodb, color: '#47A248', delay: '1s' },
+              { name: 'Next.js', icon: SiNextdotjs, color: '#000000', delay: '1.2s' },
+              { name: 'Express.js', icon: SiExpress, color: '#000000', delay: '1.4s' },
+              { name: 'Git', icon: SiGit, color: '#F05032', delay: '1.6s' },
+              { name: 'GitHub', icon: SiGithub, color: '#181717', delay: '1.8s' },
+              { name: 'Python', icon: SiPython, color: '#3776AB', delay: '2s' },
+              { name: 'TypeScript', icon: SiTypescript, color: '#3178C6', delay: '2.2s' },
+              { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4', delay: '2.4s' },
+              { name: 'Socket.io', icon: SiSocketdotio, color: '#010101', delay: '2.6s' },
+              { name: 'AWS', icon: SiAmazon, color: '#FF9900', delay: '2.8s' },
+            ].map((tech, index) => {
+              // Generate random positions for each icon
+              const positions = [
+                { top: '15%', left: '20%' },
+                { top: '25%', left: '45%' },
+                { top: '15%', left: '70%' },
+                { top: '35%', left: '25%' },
+                { top: '35%', left: '55%' },
+                { top: '35%', left: '80%' },
+                { top: '55%', left: '15%' },
+                { top: '55%', left: '40%' },
+                { top: '55%', left: '65%' },
+                { top: '55%', left: '85%' },
+                { top: '75%', left: '25%' },
+                { top: '75%', left: '50%' },
+                { top: '75%', left: '75%' },
+                { top: '90%', left: '35%' },
+                { top: '90%', left: '65%' },
+              ];
+              
+              const position = positions[index] || { top: '50%', left: '50%' };
+              const IconComponent = tech.icon;
+              return (
+                <div
+                  key={tech.name}
+                  className="group absolute transform -translate-x-1/2 -translate-y-1/2"
+                  style={{ 
+                    animationDelay: tech.delay,
+                    top: position.top,
+                    left: position.left
+                  }}
+                >
+                  <div
+                    className="w-16 h-16 flex items-center justify-center rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
+  hover:bg-slate-700/70 transition-all duration-500 cursor-pointer transform hover:scale-125 hover:rotate-12 
+  shadow-lg hover:shadow-2xl animate-pulse hover:animate-none relative overflow-hidden"
+                  >
+                    <IconComponent 
+                      className="w-10 h-10 relative z-10 transition-all duration-300 group-hover:drop-shadow-lg"
+                        style={{
+    color: tech.color,
+    filter: 'brightness(1.1)',
+  }}
+                      />
+                    
+                    {/* Glow effect */}
+                    <div 
+                      className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 blur-sm"
+                      style={{
+                        background: `radial-gradient(circle, ${tech.color}40 0%, transparent 70%)`,
+                      }}
+                    />
+                    
+                    {/* Tooltip */}
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white text-sm px-3 py-1 rounded-lg 
+                      opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-20
+                      before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 
+                      before:border-4 before:border-transparent before:border-t-slate-900/90">
+                      {tech.name}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -617,8 +711,6 @@ function App() {
                 <a
                   href="mailto:abhyuday@example.com"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  // onMouseEnter={() => haptic.light()}
-                  // onClick={() => haptic.medium()}
                 >
                   <Mail className="w-5 h-5 mr-3" />
                   rajabhyuday01@gmail.com
@@ -626,8 +718,6 @@ function App() {
                 <a
                   href="tel:+919876543210"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  // onMouseEnter={() => haptic.light()}
-                  // onClick={() => haptic.medium()}
                 >
                   <Phone className="w-5 h-5 mr-3" />
                   +91 6360058498
@@ -635,8 +725,6 @@ function App() {
                 <a
                   href="https://github.com/abhyuday"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  // onMouseEnter={() => haptic.light()}
-                  // onClick={() => haptic.medium()}
                 >
                   <Github className="w-5 h-5 mr-3" />
                   https://github.com/Abhyuday28
@@ -644,8 +732,6 @@ function App() {
                 <a
                   href="https://linkedin.com/in/abhyuday"
                   className="flex items-center text-gray-300 hover:text-blue-400 transition-colors"
-                  // onMouseEnter={() => haptic.light()}
-                  // onClick={() => haptic.medium()}
                 >
                   <Linkedin className="w-5 h-5 mr-3" />
                   https://www.linkedin.com/in/abhyuday-abd2807/
@@ -658,25 +744,20 @@ function App() {
                 type="text"
                 placeholder="Your Name"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                // onFocus={() => haptic.light()}
               />
               <input
                 type="email"
                 placeholder="Your Email"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                // onFocus={() => haptic.light()}
               />
               <textarea
                 rows={4}
                 placeholder="Your Message"
                 className="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-none"
-                // onFocus={() => haptic.light()}
               />
               <button
                 type="submit"
                 className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105"
-                // onMouseEnter={() => haptic.light()}
-                // onClick={() => haptic.success()}
               >
                 Send Message
               </button>
