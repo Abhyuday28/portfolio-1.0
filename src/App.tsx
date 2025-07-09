@@ -97,23 +97,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: '3',
-    year: '2023',
-    title: 'Web Development Certification',
-    organization: 'Online Learning Platform',
-    type: 'achievement',
-    description:
-      'Completed comprehensive web development certification covering modern frameworks and best practices.',
-    details: [
-      'Mastered full-stack development concepts',
-      'Built 10+ projects during certification',
-      'Learned industry best practices and design patterns',
-      'Achieved 95% score in final assessment',
-    ],
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Node.js'],
-  },
-  {
-    id: '4',
-    year: '2024',
+    year: '2022',
     title: 'Awesome: E-Commmerce',
     organization: 'Personal Project',
     type: 'project',
@@ -127,6 +111,22 @@ const timelineData: TimelineItem[] = [
     ],
     technologies: ['HTML', 'CSS', 'JavaScript', 'Github'],
     link: 'https://abhyuday28.github.io/',
+  },
+  {
+    id: '4',
+    year: '2023',
+    title: 'Web Development Certification',
+    organization: 'Online Learning Platform',
+    type: 'achievement',
+    description:
+      'Completed comprehensive web development certification covering modern frameworks and best practices.',
+    details: [
+      'Mastered full-stack development concepts',
+      'Built 10+ projects during certification',
+      'Learned industry best practices and design patterns',
+      'Achieved 95% score in final assessment',
+    ],
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Node.js'],
   },
   {
     id: '5',
