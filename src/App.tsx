@@ -62,7 +62,7 @@ const timelineData: TimelineItem[] = [
   {
     id: '1',
     year: '2020-2024',
-    title: 'Bachelor of Technology in Computer Science',
+    title: 'B.Tech in Computer Science and Engineering',
     organization: 'Motihari College of Engineering',
     type: 'education',
     description: 'Pursuing B.Tech in Computer Science and Engineering',
@@ -97,6 +97,22 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: '3',
+    year: '2023',
+    title: 'Web Development Certification',
+    organization: 'Online Learning Platform',
+    type: 'achievement',
+    description:
+      'Completed comprehensive web development certification covering modern frameworks and best practices.',
+    details: [
+      'Mastered full-stack development concepts',
+      'Built 10+ projects during certification',
+      'Learned industry best practices and design patterns',
+      'Achieved 95% score in final assessment',
+    ],
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Node.js'],
+  },
+  {
+    id: '4',
     year: '2024',
     title: 'Awesome: E-Commmerce',
     organization: 'Personal Project',
@@ -113,7 +129,7 @@ const timelineData: TimelineItem[] = [
     link: 'https://abhyuday28.github.io/',
   },
   {
-    id: '4',
+    id: '5',
     year: '2024',
     title: 'Nexus-academic',
     organization: 'Academic Project',
@@ -135,22 +151,7 @@ const timelineData: TimelineItem[] = [
     ],
     link: 'https://nexus-academic.vercel.app/',
   },
-  {
-    id: '6',
-    year: '2023',
-    title: 'Web Development Certification',
-    organization: 'Online Learning Platform',
-    type: 'achievement',
-    description:
-      'Completed comprehensive web development certification covering modern frameworks and best practices.',
-    details: [
-      'Mastered full-stack development concepts',
-      'Built 10+ projects during certification',
-      'Learned industry best practices and design patterns',
-      'Achieved 95% score in final assessment',
-    ],
-    technologies: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Node.js'],
-  },
+  
 ];
 
 const typeIcons = {
