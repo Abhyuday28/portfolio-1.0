@@ -392,16 +392,22 @@ function App() {
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <span className="px-4 py-2 bg-blue-500/20 rounded-full text-blue-300 border border-blue-500/30">
-              React.js Expert
+              React.js
             </span>
             <span className="px-4 py-2 bg-purple-500/20 rounded-full text-purple-300 border border-purple-500/30">
-              Node.js
+              Front-End Development
             </span>
             <span className="px-4 py-2 bg-teal-500/20 rounded-full text-teal-300 border border-teal-500/30">
-              Full Stack Development
+              Next.js
+            </span>
+            <span className="px-4 py-2 bg-teal-500/20 rounded-full text-teal-300 border border-teal-500/30">
+              Node.js
             </span>
             <span className="px-4 py-2 bg-green-500/20 rounded-full text-green-300 border border-green-500/30">
               MongoDB
+            </span>
+            <span className="px-4 py-2 bg-teal-500/20 rounded-full text-teal-300 border border-teal-500/30">
+              Full Stack Development
             </span>
           </div>
 
@@ -416,10 +422,10 @@ function App() {
       {/* Timeline Section */}
       <section
         ref={timelineRef}
-        className="py-12 px-4 sm:px-6 relative"
-        style={{ minHeight: '300vh' }}
+        className={`py-12 px-4 sm:px-6 relative ${screenSize === 'mobile' ? '' : ''}`}
+        style={{ minHeight: screenSize === 'mobile' ? 'auto' : '300vh' }}
       >
-        <div className="sticky top-16 max-w-7xl mx-auto">
+        <div className={`${screenSize === 'mobile' ? 'relative pb-8' : 'sticky top-16'} max-w-7xl mx-auto`}>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center mb-6">
             My{' '}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
@@ -435,152 +441,129 @@ function App() {
             />
           </div>
 
-          {/* Horizontal Timeline */}
-          <div className="relative">
-            {/* Horizontal Timeline Line */}
-            <div className="absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500 opacity-30"></div>
+          {/* Conditional Timeline Layout */}
+          {screenSize === 'mobile' ? (
+            /* Mobile Vertical Timeline */
+            <div className="relative max-w-sm mx-auto">
+              {/* Vertical Timeline Line */}
+              <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-teal-500 opacity-30"></div>
 
-            {/* Timeline Container */}
-            <div className="overflow-hidden">
-              <div
-                className="flex min-w-max transition-transform duration-500 ease-out"
-                style={{
-                  transform: `translateX(${getTransformValue()}px)`,
-                  gap: `${cardSpacing}px`,
-                }}
-              >
+              <div className="space-y-4">
                 {timelineData.map((item, index) => {
                   const Icon = typeIcons[item.type];
                   const isActive = activeItem === item.id;
-                  const isCurrentItem = index === currentVisibleItem;
 
                   return (
-                    <div
-                      key={item.id}
-                      className="relative flex-shrink-0"
-                      style={{ width: `${cardWidth}px` }}
-                    >
+                    <div key={item.id} className="relative flex items-start">
                       {/* Timeline Node */}
-                      <div className="absolute top-3 left-1/2 transform -translate-x-1/2 z-10">
-                        <button
-                          onClick={() => {
-                            setActiveItem(
-                              activeItem === item.id ? null : item.id
-                            );
-                          }}
-                          className={`w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-gradient-to-r ${
+                      <div className="absolute left-2 transform -translate-x-1/2 z-10">
+                        <div
+                          className={`w-8 h-8 rounded-full bg-gradient-to-r ${
                             typeColors[item.type]
                           } 
-                            shadow-lg hover:shadow-xl transform transition-all duration-300
-                            flex items-center justify-center border-4 border-slate-900 relative overflow-hidden
-                            ${
-                              isActive || isCurrentItem
-                                ? 'scale-125 shadow-2xl ring-4 ring-white/20'
-                                : 'hover:scale-110'
-                            }`}
+                            shadow-lg flex items-center justify-center border-2 border-slate-900 relative overflow-hidden
+                            ${isActive ? 'scale-110 shadow-xl ring-2 ring-white/20' : ''}`}
                         >
-                          <Icon className="w-6 sm:w-7 h-6 sm:h-7 text-white relative z-10" />
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
-                        </button>
+                          <Icon className="w-4 h-4 text-white relative z-10" />
+                        </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="mt-16 sm:mt-20 mb-10">
+                      <div className="ml-10 w-full">
                         <div
-                          className={`bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 sm:p-6 
+                          className={`bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-3 
                             shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1
-                            ${
-                              isActive || isCurrentItem
-                                ? 'ring-2 ring-blue-500/50 bg-slate-800/70 scale-105'
-                                : ''
-                            }`}
+                            ${isActive ? 'ring-2 ring-blue-500/50 bg-slate-800/70' : ''}`}
                           onClick={() => {
-                            setActiveItem(
-                              activeItem === item.id ? null : item.id
-                            );
+                            setActiveItem(activeItem === item.id ? null : item.id);
                           }}
                         >
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-lg sm:text-xl font-bold text-blue-400">
+                          {/* Always Visible: Year and Title */}
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-bold text-blue-400">
                               {item.year}
                             </span>
-                            {item.location && (
-                              <div className="flex items-center text-gray-400 text-xs sm:text-sm">
-                                <MapPin className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
-                                <span className="hidden sm:inline">
-                                  {item.location}
-                                </span>
-                              </div>
-                            )}
+                            <div className={`transform transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`}>
+                              <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </div>
                           </div>
 
-                          <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2">
+                          <h3 className="text-sm font-bold text-white leading-tight">
                             {item.title}
                           </h3>
-                          <p className="text-purple-300 font-medium mb-3 text-sm sm:text-base">
-                            {item.organization}
-                          </p>
-                          <p className="text-gray-300 leading-relaxed text-sm sm:text-base line-clamp-3">
-                            {item.description}
-                          </p>
 
-                          {/* Expanded Details */}
-                          {(isActive || isCurrentItem) && (
-                            <div className="mt-6 pt-4 border-t border-slate-600/50 animate-in slide-in-from-top duration-300">
-                              <ul className="space-y-2">
-                                {item.details
-                                  .slice(0, screenSize === 'mobile' ? 2 : 3)
-                                  .map((detail, i) => (
-                                    <li
-                                      key={i}
-                                      className="flex items-start text-gray-300 text-xs sm:text-sm"
-                                    >
-                                      <Star className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" />
+                          {/* Expanded Content */}
+                          {isActive && (
+                            <div className="mt-3 space-y-3 animate-in slide-in-from-top duration-300">
+                              <p className="text-purple-300 font-medium text-xs">
+                                {item.organization}
+                              </p>
+                              
+                              {item.location && (
+                                <div className="flex items-center text-gray-400 text-xs">
+                                  <MapPin className="w-3 h-3 mr-1" />
+                                  {item.location}
+                                </div>
+                              )}
+
+                              <p className="text-gray-300 leading-relaxed text-xs">
+                                {item.description}
+                              </p>
+
+                              <div className="pt-2 border-t border-slate-600/50">
+                                <ul className="space-y-1">
+                                  {item.details.slice(0, 3).map((detail, i) => (
+                                    <li key={i} className="flex items-start text-gray-300 text-xs">
+                                      <Star className="w-2.5 h-2.5 text-yellow-400 mr-1.5 mt-0.5 flex-shrink-0" />
                                       {detail}
                                     </li>
                                   ))}
-                              </ul>
+                                </ul>
 
-                              {item.link && (
-                                <div className="mt-4">
-                                  <a
-                                    href={item.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs sm:text-sm"
-                                  >
-                                    <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
-                                    View Project
-                                  </a>
+                                {item.link && (
+                                  <div className="mt-2">
+                                    <a
+                                      href={item.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <ExternalLink className="w-2.5 h-2.5 mr-1" />
+                                      View Project
+                                    </a>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Technologies Section */}
+                              {item.technologies && (
+                                <div className="pt-2">
+                                  <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">
+                                    Technologies
+                                  </h4>
+                                  <div className="flex flex-wrap gap-1">
+                                    {item.technologies.map((tech) => {
+                                      const TechIcon = techIcons[tech] || FileCode;
+                                      const techColor = techColors[tech] || '#64FFDA';
+                                      return (
+                                        <div
+                                          key={tech}
+                                          className="flex items-center gap-1 px-1.5 py-0.5 bg-slate-700/50 rounded-full text-xs text-white border border-slate-600/30"
+                                        >
+                                          <TechIcon 
+                                            className="w-2.5 h-2.5" 
+                                            style={{ color: techColor }}
+                                          />
+                                          <span>{tech}</span>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
                                 </div>
                               )}
-                            </div>
-                          )}
-
-                          {/* Technologies Section - Always at Bottom */}
-                          {item.technologies && (
-                            <div className="mt-auto pt-4">
-                              <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">
-                                Technologies
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {item.technologies.map((tech) => {
-                                  const TechIcon = techIcons[tech] || FileCode;
-                                  const techColor = techColors[tech] || '#64FFDA';
-                                  return (
-                                    <div
-                                      key={tech}
-                                      className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 bg-slate-700/50 rounded-full text-xs sm:text-sm text-white hover:bg-slate-600/70 transition-all duration-300 cursor-pointer transform hover:scale-105 border border-slate-600/30 hover:border-slate-500/50"
-                                    >
-                                      <TechIcon 
-                                        className="w-3.5 h-3.5 sm:w-4 sm:h-4" 
-                                        style={{ color: techColor }}
-                                      />
-                                      <span>{tech}</span>
-                                    </div>
-                                  );
-                                })}
-                              </div>
                             </div>
                           )}
                         </div>
@@ -590,14 +573,171 @@ function App() {
                 })}
               </div>
             </div>
-          </div>
+          ) : (
+            /* Desktop/Tablet Horizontal Timeline */
+            <div className="relative">
+              {/* Horizontal Timeline Line */}
+              <div className="absolute top-8 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-teal-500 opacity-30"></div>
+
+              {/* Timeline Container */}
+              <div className="overflow-hidden">
+                <div
+                  className="flex min-w-max transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(${getTransformValue()}px)`,
+                    gap: `${cardSpacing}px`,
+                  }}
+                >
+                  {timelineData.map((item, index) => {
+                    const Icon = typeIcons[item.type];
+                    const isActive = activeItem === item.id;
+                    const isCurrentItem = index === currentVisibleItem;
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="relative flex-shrink-0"
+                        style={{ width: `${cardWidth}px` }}
+                      >
+                        {/* Timeline Node */}
+                        <div className="absolute top-3 left-1/2 transform -translate-x-1/2 z-10">
+                          <button
+                            onClick={() => {
+                              setActiveItem(
+                                activeItem === item.id ? null : item.id
+                              );
+                            }}
+                            className={`w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-gradient-to-r ${
+                              typeColors[item.type]
+                            } 
+                              shadow-lg hover:shadow-xl transform transition-all duration-300
+                              flex items-center justify-center border-4 border-slate-900 relative overflow-hidden
+                              ${
+                                isActive || isCurrentItem
+                                  ? 'scale-125 shadow-2xl ring-4 ring-white/20'
+                                  : 'hover:scale-110'
+                              }`}
+                          >
+                            <Icon className="w-6 sm:w-7 h-6 sm:h-7 text-white relative z-10" />
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent animate-pulse"></div>
+                          </button>
+                        </div>
+
+                        {/* Content Card */}
+                        <div className="mt-16 sm:mt-20 mb-10">
+                          <div
+                            className={`bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 sm:p-6 
+                              shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1
+                              ${
+                                isActive || isCurrentItem
+                                  ? 'ring-2 ring-blue-500/50 bg-slate-800/70 scale-105'
+                                  : ''
+                              }`}
+                            onClick={() => {
+                              setActiveItem(
+                                activeItem === item.id ? null : item.id
+                              );
+                            }}
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-lg sm:text-xl font-bold text-blue-400">
+                                {item.year}
+                              </span>
+                              {item.location && (
+                                <div className="flex items-center text-gray-400 text-xs sm:text-sm">
+                                  <MapPin className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                                  <span className="hidden sm:inline">
+                                    {item.location}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-purple-300 font-medium mb-3 text-sm sm:text-base">
+                              {item.organization}
+                            </p>
+                            <p className="text-gray-300 leading-relaxed text-sm sm:text-base line-clamp-3">
+                              {item.description}
+                            </p>
+
+                            {/* Expanded Details */}
+                            {(isActive || isCurrentItem) && (
+                              <div className="mt-6 pt-4 border-t border-slate-600/50 animate-in slide-in-from-top duration-300">
+                                <ul className="space-y-2">
+                                  {item.details
+                                    .slice(0, screenSize === 'mobile' ? 2 : 3)
+                                    .map((detail, i) => (
+                                      <li
+                                        key={i}
+                                        className="flex items-start text-gray-300 text-xs sm:text-sm"
+                                      >
+                                        <Star className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" />
+                                        {detail}
+                                      </li>
+                                    ))}
+                                </ul>
+
+                                {item.link && (
+                                  <div className="mt-4">
+                                    <a
+                                      href={item.link}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors text-xs sm:text-sm"
+                                    >
+                                      <ExternalLink className="w-3 sm:w-4 h-3 sm:h-4 mr-1" />
+                                      View Project
+                                    </a>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+
+                            {/* Technologies Section - Always at Bottom */}
+                            {item.technologies && (
+                              <div className="mt-auto pt-4">
+                                <h4 className="text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">
+                                  Technologies
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {item.technologies.map((tech) => {
+                                    const TechIcon = techIcons[tech] || FileCode;
+                                    const techColor = techColors[tech] || '#64FFDA';
+                                    return (
+                                      <div
+                                        key={tech}
+                                        className="flex items-center gap-1.5 px-2 sm:px-3 py-1.5 bg-slate-700/50 rounded-full text-xs sm:text-sm text-white hover:bg-slate-600/70 transition-all duration-300 cursor-pointer transform hover:scale-105 border border-slate-600/30 hover:border-slate-500/50"
+                                      >
+                                        <TechIcon 
+                                          className="w-3.5 h-3.5 sm:w-4 sm:h-4" 
+                                          style={{ color: techColor }}
+                                        />
+                                        <span>{tech}</span>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-6 bg-slate-800/30">
+      <section className={`${screenSize === 'mobile' ? 'py-12' : 'py-20'} px-6 bg-slate-800/30`}>
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-12">
+          <h2 className={`${screenSize === 'mobile' ? 'text-2xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
             Technical{' '}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Skills
@@ -605,7 +745,7 @@ function App() {
           </h2>
 
           {/* Random Technology Icons */}
-          <div className="relative min-h-[500px] w-full overflow-hidden">
+          <div className={`relative w-full overflow-hidden ${screenSize === 'mobile' ? 'min-h-[300px]' : 'min-h-[500px]'}`}>
             {[
               { name: 'React.js', icon: SiReact, color: '#61DAFB', delay: '0s' },
               { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E', delay: '0.2s' },
@@ -656,16 +796,20 @@ function App() {
                 >
                   <div
                     className="w-16 h-16 flex items-center justify-center rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 
-  hover:bg-slate-700/70 transition-all duration-500 cursor-pointer transform hover:scale-125 hover:rotate-12 
-  shadow-lg hover:shadow-2xl animate-pulse hover:animate-none relative overflow-hidden"
+                      hover:bg-slate-700/70 transition-all duration-500 cursor-pointer transform hover:scale-125 hover:rotate-12 
+                      shadow-lg hover:shadow-2xl animate-pulse hover:animate-none relative overflow-hidden"
+                    style={{ 
+                      width: screenSize === 'mobile' ? '48px' : '64px',
+                      height: screenSize === 'mobile' ? '48px' : '64px'
+                    }}
                   >
                     <IconComponent 
-                      className="w-10 h-10 relative z-10 transition-all duration-300 group-hover:drop-shadow-lg"
-                        style={{
-    color: tech.color,
-    filter: 'brightness(1.1)',
-  }}
-                      />
+                      className={`${screenSize === 'mobile' ? 'w-6 h-6' : 'w-10 h-10'} relative z-10 transition-all duration-300 group-hover:drop-shadow-lg`}
+                      style={{
+                        color: tech.color,
+                        filter: 'brightness(1.1)',
+                      }}
+                    />
                     
                     {/* Glow effect */}
                     <div 
@@ -676,10 +820,10 @@ function App() {
                     />
                     
                     {/* Tooltip */}
-                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white text-sm px-3 py-1 rounded-lg 
+                    <div className={`absolute -top-12 left-1/2 transform -translate-x-1/2 bg-slate-900/90 text-white px-3 py-1 rounded-lg 
                       opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-20
                       before:content-[''] before:absolute before:top-full before:left-1/2 before:transform before:-translate-x-1/2 
-                      before:border-4 before:border-transparent before:border-t-slate-900/90">
+                      before:border-4 before:border-transparent before:border-t-slate-900/90 ${screenSize === 'mobile' ? 'text-xs' : 'text-sm'}`}>
                       {tech.name}
                     </div>
                   </div>
@@ -691,9 +835,9 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6">
+      <section className={`${screenSize === 'mobile' ? 'py-12' : 'py-20'} px-6`}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-12">
+          <h2 className={`${screenSize === 'mobile' ? 'text-2xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
             Let's{' '}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Connect
@@ -702,7 +846,7 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 text-left">
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <p className={`${screenSize === 'mobile' ? 'text-base' : 'text-xl'} text-gray-300 leading-relaxed`}>
                 I'm always excited to work on new projects and collaborate with
                 fellow developers. Let's build something amazing together!
               </p>
@@ -767,9 +911,9 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-slate-900/50 border-t border-slate-800">
+      <footer className={`${screenSize === 'mobile' ? 'py-6' : 'py-8'} px-6 bg-slate-900/50 border-t border-slate-800`}>
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-gray-400">
+          <p className={`text-gray-400 ${screenSize === 'mobile' ? 'text-sm' : ''}`}>
             © 2025 Abhyuday. Built with passion and modern web technologies.
           </p>
         </div>
