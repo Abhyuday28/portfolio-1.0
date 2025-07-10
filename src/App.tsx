@@ -492,14 +492,14 @@ function App() {
                             </div>
                           </div>
 
-                          <h3 className="text-sm font-bold text-white leading-tight">
+                          <h3 className="text-base font-bold text-white leading-tight">
                             {item.title}
                           </h3>
 
                           {/* Expanded Content */}
                           {isActive && (
                             <div className="mt-3 space-y-3 animate-in slide-in-from-top duration-300">
-                              <p className="text-purple-300 font-medium text-xs">
+                              <p className="text-purple-300 font-medium text-sm">
                                 {item.organization}
                               </p>
                               
@@ -510,14 +510,14 @@ function App() {
                                 </div>
                               )}
 
-                              <p className="text-gray-300 leading-relaxed text-xs">
+                              <p className="text-gray-300 leading-relaxed text-sm">
                                 {item.description}
                               </p>
 
                               <div className="pt-2 border-t border-slate-600/50">
                                 <ul className="space-y-1">
                                   {item.details.slice(0, 3).map((detail, i) => (
-                                    <li key={i} className="flex items-start text-gray-300 text-xs">
+                                    <li key={i} className="flex items-start text-gray-300 text-sm">
                                       <Star className="w-2.5 h-2.5 text-yellow-400 mr-1.5 mt-0.5 flex-shrink-0" />
                                       {detail}
                                     </li>
@@ -915,7 +915,7 @@ function App() {
       <footer className={`${screenSize === 'mobile' ? 'py-6' : 'py-8'} px-6 bg-slate-900/50 border-t border-slate-800`}>
         <div className="max-w-4xl mx-auto text-center">
           <p className={`text-gray-400 ${screenSize === 'mobile' ? 'text-sm' : ''}`}>
-            © 2025 Abhyuday. Built with passion and modern web technologies.
+            © 2025 Abhyuday. Let's Explore the Possibility.
           </p>
         </div>
       </footer>
