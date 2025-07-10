@@ -344,6 +344,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-50"></div>
@@ -738,7 +739,7 @@ function App() {
       {/* Skills Section */}
       <section className={`${screenSize === 'mobile' ? 'py-12' : 'py-20'} px-6 bg-slate-800/30`}>
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className={`${screenSize === 'mobile' ? 'text-2xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
+          <h2 className={`${screenSize === 'mobile' ? 'text-3xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
             Technical{' '}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Skills
@@ -838,7 +839,7 @@ function App() {
       {/* Contact Section */}
       <section className={`${screenSize === 'mobile' ? 'py-12' : 'py-20'} px-6`}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`${screenSize === 'mobile' ? 'text-2xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
+          <h2 className={`${screenSize === 'mobile' ? 'text-3xl mb-8' : 'text-4xl mb-12'} font-bold text-white`}>
             Let's{' '}
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Connect
@@ -847,9 +848,8 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-8 items-start">
             <div className="space-y-6 text-left">
-              <p className={`${screenSize === 'mobile' ? 'text-base' : 'text-xl'} text-gray-300 leading-relaxed`}>
-                I'm always excited to work on new projects and collaborate with
-                fellow developers. Let's build something amazing together!
+              <p className={`${screenSize === 'mobile' ? 'text-xl' : 'text-2xl'} text-gray-300 leading-relaxed`}>
+                I'm always excited to work on new projects, Let's build something amazing together!
               </p>
 
               <div className="space-y-4">
