@@ -68,8 +68,8 @@ const timelineData: TimelineItem[] = [
     description: 'Pursuing B.Tech in Computer Science and Engineering',
     details: [
       'CGPA: 7.81/10',
-      'Relevant Coursework: Data Structures, Algorithms, Database Management',
       'Active participant in coding competitions and hackathons',
+      'Relevant Coursework: DSA, DBMS, Computer Network',
       'Member of technical clubs and societies',
     ],
     location: 'Motihari, Bihar',
